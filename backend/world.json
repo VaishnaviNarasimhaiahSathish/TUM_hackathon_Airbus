@@ -1,0 +1,346 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "name": "Munich Airport",
+            "type": "pad",
+            "lat": 48.3538,
+            "lon": 11.7861,
+            "description": "Major airport pad and northern entry point for eVTOL traffic."
+        },
+        {
+            "id": 2,
+            "name": "Munich Central Station (Hauptbahnhof)",
+            "type": "pad",
+            "lat": 48.1402,
+            "lon": 11.5584,
+            "description": "High passenger-transfer location near the city center."
+        },
+        {
+            "id": 3,
+            "name": "Marienplatz",
+            "type": "pad",
+            "lat": 48.1374,
+            "lon": 11.5755,
+            "description": "Central Munich pad with high passenger demand."
+        },
+        {
+            "id": 4,
+            "name": "TUM Main Campus",
+            "type": "pad",
+            "lat": 48.1486,
+            "lon": 11.5682,
+            "description": "University and technology district pad."
+        },
+        {
+            "id": 5,
+            "name": "LMU Munich",
+            "type": "pad",
+            "lat": 48.1508,
+            "lon": 11.5806,
+            "description": "University district pad near Maxvorstadt."
+        },
+        {
+            "id": 6,
+            "name": "Allianz Arena",
+            "type": "pad",
+            "lat": 48.2188,
+            "lon": 11.6247,
+            "description": "Event-based northern mobility pad."
+        },
+        {
+            "id": 7,
+            "name": "Messe München",
+            "type": "pad",
+            "lat": 48.1356,
+            "lon": 11.6903,
+            "description": "Trade fair and business mobility pad."
+        },
+        {
+            "id": 8,
+            "name": "Olympiapark",
+            "type": "pad",
+            "lat": 48.1739,
+            "lon": 11.5461,
+            "description": "Event and leisure mobility pad."
+        },
+        {
+            "id": 9,
+            "name": "Schwabing",
+            "type": "pad",
+            "lat": 48.1665,
+            "lon": 11.586,
+            "description": "Dense residential and business district pad."
+        },
+        {
+            "id": 10,
+            "name": "Sendlinger Tor",
+            "type": "pad",
+            "lat": 48.133,
+            "lon": 11.5668,
+            "description": "Inner-city transfer pad."
+        },
+        {
+            "id": 11,
+            "name": "TUM Klinikum Rechts der Isar",
+            "type": "hospital",
+            "lat": 48.1355,
+            "lon": 11.5991,
+            "description": "Central medical landing point near Rechts der Isar."
+        },
+        {
+            "id": 12,
+            "name": "Großhadern Clinic",
+            "type": "hospital",
+            "lat": 48.1113,
+            "lon": 11.4697,
+            "description": "Large hospital zone in southwest Munich."
+        },
+        {
+            "id": 13,
+            "name": "München Klinik Schwabing",
+            "type": "hospital",
+            "lat": 48.1678,
+            "lon": 11.5826,
+            "description": "Hospital landing point in Schwabing."
+        },
+        {
+            "id": 14,
+            "name": "Munich Clinic Bogenhausen",
+            "type": "hospital",
+            "lat": 48.1525,
+            "lon": 11.6215,
+            "description": "Hospital landing point in eastern Munich."
+        },
+        {
+            "id": 15,
+            "name": "München Klinik Neuperlach",
+            "type": "hospital",
+            "lat": 48.1039,
+            "lon": 11.646,
+            "description": "Southeast medical landing point."
+        },
+        {
+            "id": 16,
+            "name": "Harlaching Hospital",
+            "type": "hospital",
+            "lat": 48.1027,
+            "lon": 11.5798,
+            "description": "Southern medical landing point."
+        },
+        {
+            "id": 17,
+            "name": "Charging Hub A - Airport",
+            "type": "charging_hub",
+            "lat": 48.36,
+            "lon": 11.78,
+            "description": "Airport charging hub for aircraft recharging between airport missions."
+        },
+        {
+            "id": 18,
+            "name": "Charging Hub B - TUM Tech Area",
+            "type": "charging_hub",
+            "lat": 48.1525,
+            "lon": 11.574,
+            "description": "Technology-district charging hub near TUM."
+        },
+        {
+            "id": 19,
+            "name": "Charging Hub C - City Center",
+            "type": "charging_hub",
+            "lat": 48.139,
+            "lon": 11.581,
+            "description": "City-center charging hub near Marienplatz for high passenger turnover."
+        },
+        {
+            "id": 20,
+            "name": "Charging Hub D - Großhadern Zone",
+            "type": "charging_hub",
+            "lat": 48.109,
+            "lon": 11.475,
+            "description": "Emergency logistics charging hub near Großhadern Clinic."
+        }
+    ],
+    "edges": [
+        {
+            "start": "Munich Airport",
+            "end": "Charging Hub A - Airport",
+            "route_type": "charging_corridor",
+            "distance_km": 0.82
+        },
+        {
+            "start": "Munich Airport",
+            "end": "Allianz Arena",
+            "route_type": "airport_corridor",
+            "distance_km": 19.18
+        },
+        {
+            "start": "Munich Airport",
+            "end": "Munich Central Station (Hauptbahnhof)",
+            "route_type": "airport_corridor",
+            "distance_km": 29.13
+        },
+        {
+            "start": "Munich Airport",
+            "end": "Messe München",
+            "route_type": "airport_corridor",
+            "distance_km": 25.28
+        },
+        {
+            "start": "Allianz Arena",
+            "end": "Schwabing",
+            "route_type": "city_corridor",
+            "distance_km": 6.48
+        },
+        {
+            "start": "Allianz Arena",
+            "end": "Olympiapark",
+            "route_type": "city_corridor",
+            "distance_km": 7.67
+        },
+        {
+            "start": "Olympiapark",
+            "end": "Munich Central Station (Hauptbahnhof)",
+            "route_type": "city_corridor",
+            "distance_km": 3.86
+        },
+        {
+            "start": "Olympiapark",
+            "end": "LMU Munich",
+            "route_type": "city_corridor",
+            "distance_km": 3.63
+        },
+        {
+            "start": "Schwabing",
+            "end": "LMU Munich",
+            "route_type": "city_corridor",
+            "distance_km": 1.79
+        },
+        {
+            "start": "Schwabing",
+            "end": "München Klinik Schwabing",
+            "route_type": "medical_corridor",
+            "distance_km": 0.29
+        },
+        {
+            "start": "Schwabing",
+            "end": "Munich Clinic Bogenhausen",
+            "route_type": "medical_corridor",
+            "distance_km": 3.06
+        },
+        {
+            "start": "LMU Munich",
+            "end": "TUM Main Campus",
+            "route_type": "city_corridor",
+            "distance_km": 0.95
+        },
+        {
+            "start": "LMU Munich",
+            "end": "Marienplatz",
+            "route_type": "city_corridor",
+            "distance_km": 1.54
+        },
+        {
+            "start": "TUM Main Campus",
+            "end": "Marienplatz",
+            "route_type": "city_corridor",
+            "distance_km": 1.36
+        },
+        {
+            "start": "TUM Main Campus",
+            "end": "TUM Klinikum Rechts der Isar",
+            "route_type": "medical_corridor",
+            "distance_km": 2.72
+        },
+        {
+            "start": "TUM Main Campus",
+            "end": "Charging Hub B - TUM Tech Area",
+            "route_type": "charging_corridor",
+            "distance_km": 0.61
+        },
+        {
+            "start": "Marienplatz",
+            "end": "Munich Central Station (Hauptbahnhof)",
+            "route_type": "city_corridor",
+            "distance_km": 1.31
+        },
+        {
+            "start": "Marienplatz",
+            "end": "Sendlinger Tor",
+            "route_type": "city_corridor",
+            "distance_km": 0.81
+        },
+        {
+            "start": "Marienplatz",
+            "end": "Charging Hub C - City Center",
+            "route_type": "charging_corridor",
+            "distance_km": 0.45
+        },
+        {
+            "start": "Marienplatz",
+            "end": "TUM Klinikum Rechts der Isar",
+            "route_type": "medical_corridor",
+            "distance_km": 1.76
+        },
+        {
+            "start": "Marienplatz",
+            "end": "Messe München",
+            "route_type": "city_corridor",
+            "distance_km": 8.52
+        },
+        {
+            "start": "Messe München",
+            "end": "Munich Clinic Bogenhausen",
+            "route_type": "medical_corridor",
+            "distance_km": 5.44
+        },
+        {
+            "start": "Messe München",
+            "end": "München Klinik Neuperlach",
+            "route_type": "medical_corridor",
+            "distance_km": 4.82
+        },
+        {
+            "start": "Munich Clinic Bogenhausen",
+            "end": "TUM Klinikum Rechts der Isar",
+            "route_type": "medical_corridor",
+            "distance_km": 2.52
+        },
+        {
+            "start": "Sendlinger Tor",
+            "end": "Harlaching Hospital",
+            "route_type": "medical_corridor",
+            "distance_km": 3.5
+        },
+        {
+            "start": "Sendlinger Tor",
+            "end": "Großhadern Clinic",
+            "route_type": "medical_corridor",
+            "distance_km": 7.6
+        },
+        {
+            "start": "Sendlinger Tor",
+            "end": "Munich Central Station (Hauptbahnhof)",
+            "route_type": "city_corridor",
+            "distance_km": 1.01
+        },
+        {
+            "start": "Großhadern Clinic",
+            "end": "Charging Hub D - Großhadern Zone",
+            "route_type": "charging_corridor",
+            "distance_km": 0.47
+        },
+        {
+            "start": "Großhadern Clinic",
+            "end": "Harlaching Hospital",
+            "route_type": "medical_corridor",
+            "distance_km": 8.23
+        },
+        {
+            "start": "Harlaching Hospital",
+            "end": "München Klinik Neuperlach",
+            "route_type": "medical_corridor",
+            "distance_km": 4.92
+        }
+    ]
+}
