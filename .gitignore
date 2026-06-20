@@ -8,6 +8,8 @@ __pycache__/
 venv/
 .env/
 .venv/
+.node-runtime/
+.tools/
 
 # OS files
 .DS_Store
@@ -18,3 +20,5 @@ venv/
 
 # Optional generated files
 backend/munich_airspace_map.html
+backend/single_evtol_scenario_map.html
+backend/fleet_evtol_scenario_map.html

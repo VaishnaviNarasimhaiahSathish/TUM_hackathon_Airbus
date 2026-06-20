@@ -14,7 +14,9 @@
             "priority_level": 8,
             "zone_type": "airport",
             "demand_score": 100,
-            "weather_zone": "north"
+            "weather_zone": "north",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 2,
@@ -30,7 +32,9 @@
             "priority_level": 8,
             "zone_type": "commercial",
             "demand_score": 95,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 3,
@@ -46,7 +50,9 @@
             "priority_level": 9,
             "zone_type": "commercial",
             "demand_score": 90,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 4,
@@ -62,7 +68,9 @@
             "priority_level": 7,
             "zone_type": "educational",
             "demand_score": 85,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 5,
@@ -78,7 +86,9 @@
             "priority_level": 7,
             "zone_type": "educational",
             "demand_score": 80,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 6,
@@ -94,7 +104,9 @@
             "priority_level": 6,
             "zone_type": "event",
             "demand_score": 70,
-            "weather_zone": "north"
+            "weather_zone": "north",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 7,
@@ -110,7 +122,9 @@
             "priority_level": 7,
             "zone_type": "commercial",
             "demand_score": 75,
-            "weather_zone": "east"
+            "weather_zone": "east",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 8,
@@ -126,7 +140,9 @@
             "priority_level": 6,
             "zone_type": "event",
             "demand_score": 70,
-            "weather_zone": "northwest"
+            "weather_zone": "northwest",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 9,
@@ -142,7 +158,9 @@
             "priority_level": 6,
             "zone_type": "residential",
             "demand_score": 75,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 10,
@@ -158,7 +176,9 @@
             "priority_level": 7,
             "zone_type": "commercial",
             "demand_score": 80,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
         },
         {
             "id": 11,
@@ -174,7 +194,9 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 70,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": true
         },
         {
             "id": 12,
@@ -190,7 +212,9 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 75,
-            "weather_zone": "west"
+            "weather_zone": "west",
+            "charging_available": false,
+            "emergency_landing": true
         },
         {
             "id": 13,
@@ -206,7 +230,9 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 65,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": true
         },
         {
             "id": 14,
@@ -222,7 +248,9 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 65,
-            "weather_zone": "east"
+            "weather_zone": "east",
+            "charging_available": false,
+            "emergency_landing": true
         },
         {
             "id": 15,
@@ -238,7 +266,9 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 60,
-            "weather_zone": "southeast"
+            "weather_zone": "southeast",
+            "charging_available": false,
+            "emergency_landing": true
         },
         {
             "id": 16,
@@ -254,7 +284,9 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 60,
-            "weather_zone": "south"
+            "weather_zone": "south",
+            "charging_available": false,
+            "emergency_landing": true
         },
         {
             "id": 17,
@@ -270,7 +302,9 @@
             "priority_level": 6,
             "zone_type": "airport",
             "demand_score": 85,
-            "weather_zone": "north"
+            "weather_zone": "north",
+            "charging_available": true,
+            "emergency_landing": false
         },
         {
             "id": 18,
@@ -286,7 +320,9 @@
             "priority_level": 6,
             "zone_type": "educational",
             "demand_score": 80,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": true,
+            "emergency_landing": false
         },
         {
             "id": 19,
@@ -302,7 +338,9 @@
             "priority_level": 6,
             "zone_type": "commercial",
             "demand_score": 85,
-            "weather_zone": "central"
+            "weather_zone": "central",
+            "charging_available": true,
+            "emergency_landing": false
         },
         {
             "id": 20,
@@ -318,7 +356,9 @@
             "priority_level": 6,
             "zone_type": "medical",
             "demand_score": 70,
-            "weather_zone": "west"
+            "weather_zone": "west",
+            "charging_available": true,
+            "emergency_landing": false
         },
         {
             "id": 21,
@@ -334,7 +374,9 @@
             "priority_level": 6,
             "zone_type": "commercial",
             "demand_score": 75,
-            "weather_zone": "east"
+            "weather_zone": "east",
+            "charging_available": true,
+            "emergency_landing": false
         }
     ],
     "edges": [

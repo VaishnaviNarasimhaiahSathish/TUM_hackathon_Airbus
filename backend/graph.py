@@ -45,6 +45,8 @@ class AirNode:
         demand_score=10,
         weather_zone="central",
         current_load=0,
+        charging_available=None,
+        emergency_landing=None,
     ):
         self.id = node_id
         self.name = name
@@ -59,6 +61,16 @@ class AirNode:
         self.zone_type = zone_type
         self.demand_score = demand_score
         self.weather_zone = weather_zone
+        self.charging_available = (
+            node_type == "charging_hub"
+            if charging_available is None
+            else charging_available
+        )
+        self.emergency_landing = (
+            node_type == "hospital"
+            if emergency_landing is None
+            else emergency_landing
+        )
 
     @property
     def available_slots(self):
@@ -88,6 +100,8 @@ class AirNode:
             "zone_type": self.zone_type,
             "demand_score": self.demand_score,
             "weather_zone": self.weather_zone,
+            "charging_available": self.charging_available,
+            "emergency_landing": self.emergency_landing,
         }
 
 
@@ -176,6 +190,8 @@ class MunichAirspaceDigitalTwin:
             zone_type=air_node.zone_type,
             demand_score=air_node.demand_score,
             weather_zone=air_node.weather_zone,
+            charging_available=air_node.charging_available,
+            emergency_landing=air_node.emergency_landing,
         )
 
     def sync_node_to_graph(self, node_name):
@@ -248,6 +264,8 @@ class MunichAirspaceDigitalTwin:
             "demand_score": node.demand_score,
             "zone_type": node.zone_type,
             "weather_zone": node.weather_zone,
+            "charging_available": node.charging_available,
+            "emergency_landing": node.emergency_landing,
         }
 
     def occupy_landing_slot(self, node_name):

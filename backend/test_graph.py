@@ -1,4 +1,10 @@
-from graph import MunichAirspaceDigitalTwin
+"""Manual smoke demo for the static Munich airspace digital twin.
+
+Run this module from the repository root with:
+    python -m backend.test_graph
+"""
+
+from backend.graph import MunichAirspaceDigitalTwin
 
 
 def print_section(title):
