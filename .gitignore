@@ -8,6 +8,11 @@ __pycache__/
 venv/
 .env/
 .venv/
+<<<<<<< HEAD
+=======
+.node-runtime/
+.tools/
+>>>>>>> 4f6292b (Modified UI)
 
 # OS files
 .DS_Store
@@ -17,4 +22,10 @@ venv/
 .idea/
 
 # Optional generated files
+<<<<<<< HEAD
 backend/munich_airspace_map.html
+=======
+backend/munich_airspace_map.html
+backend/single_evtol_scenario_map.html
+backend/fleet_evtol_scenario_map.html
+>>>>>>> 4f6292b (Modified UI)

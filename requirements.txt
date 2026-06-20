@@ -1,0 +1,8 @@
+# Python 3.12 backend runtime
+# The JSON dashboard API uses only the Python standard library.
+folium>=0.17,<1.0
+branca>=0.8,<1.0
+networkx>=3.2,<4.0
+
+# React/Vite dependencies are intentionally managed separately in
+# frontend/package.json and installed with `npm install`.

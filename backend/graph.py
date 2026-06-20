@@ -72,6 +72,14 @@ class AirNode:
         return max(self.capacity - self.current_load, 0)
 
     @property
+    def charging_available(self):
+        return self.node_type == "charging_hub" or self.node_category == "charging_hub"
+
+    @property
+    def emergency_landing(self):
+        return self.node_type == "hospital" or self.priority_level >= 9
+
+    @property
     def availability_status(self):
         if self.available_slots <= 0:
             return "full"
@@ -96,6 +104,8 @@ class AirNode:
             "zone_type": self.zone_type,
             "demand_score": self.demand_score,
             "weather_zone": self.weather_zone,
+            "charging_available": self.charging_available,
+            "emergency_landing": self.emergency_landing,
         }
 
 
@@ -537,6 +547,11 @@ class MunichAirspaceDigitalTwin:
         )
 
         return result
+
+    def find_shortest_path(self, start, destination, mission_type="passenger"):
+        """Thin wrapper that returns (path, distance_km, total_cost) for fleet_scenario compatibility."""
+        result = self.find_best_route(start, destination, mission_type)
+        return result["path"], result["distance_km"], result["total_cost"]
 
     def find_nearest_node_by_type(self, start, node_type, mission_type="passenger"):
         candidates = [

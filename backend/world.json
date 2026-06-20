@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "simulation_parameters": {
         "battery_consumption_rate": 0.18,
         "traffic_penalty_per_aircraft": 2.0,
@@ -9,11 +10,14 @@
         "cost_formula": "Passenger and medical emergency routing over fixed air corridors.",
         "mission_type_note": "Emergency mission means medical emergency only. Low battery and aircraft failure are aircraft states, not mission types."
     },
+=======
+>>>>>>> 4f6292b (Modified UI)
     "nodes": [
         {
             "id": 1,
             "name": "Munich Airport",
             "type": "pad",
+<<<<<<< HEAD
             "category": "transport_hub",
             "lat": 48.3538,
             "lon": 11.7861,
@@ -26,11 +30,27 @@
             "zone_type": "airport",
             "demand_score": 100,
             "weather_zone": "north"
+=======
+            "lat": 48.3538,
+            "lon": 11.7861,
+            "description": "Major airport pad and northern entry point for eVTOL traffic.",
+            "capacity": 8,
+            "current_load": 3,
+            "available_slots": 5,
+            "availability_status": "available",
+            "priority_level": 8,
+            "zone_type": "airport",
+            "demand_score": 100,
+            "weather_zone": "north",
+            "charging_available": false,
+            "emergency_landing": false
+>>>>>>> 4f6292b (Modified UI)
         },
         {
             "id": 2,
             "name": "Munich Central Station (Hauptbahnhof)",
             "type": "pad",
+<<<<<<< HEAD
             "category": "transport_hub",
             "lat": 48.1402,
             "lon": 11.5584,
@@ -86,6 +106,29 @@
             "lat": 48.1374,
             "lon": 11.5755,
             "description": "Central city demand node.",
+=======
+            "lat": 48.1402,
+            "lon": 11.5584,
+            "description": "High passenger-transfer pad near the main railway station.",
+            "capacity": 6,
+            "current_load": 4,
+            "available_slots": 2,
+            "availability_status": "busy",
+            "priority_level": 8,
+            "zone_type": "commercial",
+            "demand_score": 95,
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 3,
+            "name": "Marienplatz",
+            "type": "pad",
+            "lat": 48.1374,
+            "lon": 11.5755,
+            "description": "Central Munich pad with high passenger demand.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 5,
             "current_load": 5,
             "available_slots": 0,
@@ -93,6 +136,7 @@
             "priority_level": 9,
             "zone_type": "commercial",
             "demand_score": 90,
+<<<<<<< HEAD
             "weather_zone": "central"
         },
         {
@@ -341,11 +385,133 @@
             "lat": 48.151,
             "lon": 11.568,
             "description": "Central university and residential demand zone.",
+=======
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 4,
+            "name": "TUM Main Campus",
+            "type": "pad",
+            "lat": 48.1486,
+            "lon": 11.5682,
+            "description": "University and technology district pad.",
             "capacity": 4,
             "current_load": 2,
             "available_slots": 2,
             "availability_status": "busy",
             "priority_level": 7,
+            "zone_type": "educational",
+            "demand_score": 85,
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 5,
+            "name": "LMU Munich",
+            "type": "pad",
+            "lat": 48.1508,
+            "lon": 11.5806,
+            "description": "University district pad near Maxvorstadt.",
+            "capacity": 4,
+            "current_load": 2,
+            "available_slots": 2,
+            "availability_status": "busy",
+            "priority_level": 7,
+            "zone_type": "educational",
+            "demand_score": 80,
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 6,
+            "name": "Allianz Arena",
+            "type": "pad",
+            "lat": 48.2188,
+            "lon": 11.6247,
+            "description": "Event-based northern mobility pad.",
+            "capacity": 4,
+            "current_load": 1,
+            "available_slots": 3,
+            "availability_status": "available",
+            "priority_level": 6,
+            "zone_type": "event",
+            "demand_score": 70,
+            "weather_zone": "north",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 7,
+            "name": "Messe München",
+            "type": "pad",
+            "lat": 48.1356,
+            "lon": 11.6903,
+            "description": "Trade fair and business mobility pad.",
+            "capacity": 5,
+            "current_load": 2,
+            "available_slots": 3,
+            "availability_status": "available",
+            "priority_level": 7,
+            "zone_type": "commercial",
+            "demand_score": 75,
+            "weather_zone": "east",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 8,
+            "name": "Olympiapark",
+            "type": "pad",
+            "lat": 48.1739,
+            "lon": 11.5461,
+            "description": "Event and leisure mobility pad.",
+            "capacity": 4,
+            "current_load": 2,
+            "available_slots": 2,
+            "availability_status": "busy",
+            "priority_level": 6,
+            "zone_type": "event",
+            "demand_score": 70,
+            "weather_zone": "northwest",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 9,
+            "name": "Schwabing",
+            "type": "pad",
+            "lat": 48.1665,
+            "lon": 11.586,
+            "description": "Dense residential and business district pad.",
+            "capacity": 3,
+            "current_load": 2,
+            "available_slots": 1,
+            "availability_status": "busy",
+            "priority_level": 6,
+            "zone_type": "residential",
+            "demand_score": 75,
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 10,
+            "name": "Sendlinger Tor",
+            "type": "pad",
+            "lat": 48.133,
+            "lon": 11.5668,
+            "description": "Inner-city transfer pad.",
+>>>>>>> 4f6292b (Modified UI)
+            "capacity": 4,
+            "current_load": 2,
+            "available_slots": 2,
+            "availability_status": "busy",
+            "priority_level": 7,
+<<<<<<< HEAD
             "zone_type": "residential",
             "demand_score": 80,
             "weather_zone": "central"
@@ -358,6 +524,21 @@
             "lat": 48.1355,
             "lon": 11.5991,
             "description": "Central emergency hospital.",
+=======
+            "zone_type": "commercial",
+            "demand_score": 80,
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": false
+        },
+        {
+            "id": 11,
+            "name": "TUM Klinikum Rechts der Isar",
+            "type": "hospital",
+            "lat": 48.1355,
+            "lon": 11.5991,
+            "description": "Central medical landing point near Rechts der Isar.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 4,
             "current_load": 1,
             "available_slots": 3,
@@ -365,6 +546,7 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 70,
+<<<<<<< HEAD
             "weather_zone": "central"
         },
         {
@@ -375,6 +557,19 @@
             "lat": 48.1113,
             "lon": 11.4697,
             "description": "Southwest major hospital.",
+=======
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": true
+        },
+        {
+            "id": 12,
+            "name": "Großhadern Clinic",
+            "type": "hospital",
+            "lat": 48.1113,
+            "lon": 11.4697,
+            "description": "Large hospital zone in southwest Munich.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 5,
             "current_load": 2,
             "available_slots": 3,
@@ -382,6 +577,7 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 75,
+<<<<<<< HEAD
             "weather_zone": "west"
         },
         {
@@ -392,6 +588,19 @@
             "lat": 48.1678,
             "lon": 11.5826,
             "description": "North-central hospital.",
+=======
+            "weather_zone": "west",
+            "charging_available": false,
+            "emergency_landing": true
+        },
+        {
+            "id": 13,
+            "name": "München Klinik Schwabing",
+            "type": "hospital",
+            "lat": 48.1678,
+            "lon": 11.5826,
+            "description": "Hospital landing point in Schwabing.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 3,
             "current_load": 2,
             "available_slots": 1,
@@ -399,6 +608,7 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 65,
+<<<<<<< HEAD
             "weather_zone": "central"
         },
         {
@@ -409,6 +619,19 @@
             "lat": 48.1525,
             "lon": 11.6215,
             "description": "East Munich hospital.",
+=======
+            "weather_zone": "central",
+            "charging_available": false,
+            "emergency_landing": true
+        },
+        {
+            "id": 14,
+            "name": "Munich Clinic Bogenhausen",
+            "type": "hospital",
+            "lat": 48.1525,
+            "lon": 11.6215,
+            "description": "Hospital landing point in eastern Munich.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 3,
             "current_load": 1,
             "available_slots": 2,
@@ -416,6 +639,7 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 65,
+<<<<<<< HEAD
             "weather_zone": "east"
         },
         {
@@ -426,6 +650,19 @@
             "lat": 48.1039,
             "lon": 11.646,
             "description": "Southeast hospital.",
+=======
+            "weather_zone": "east",
+            "charging_available": false,
+            "emergency_landing": true
+        },
+        {
+            "id": 15,
+            "name": "München Klinik Neuperlach",
+            "type": "hospital",
+            "lat": 48.1039,
+            "lon": 11.646,
+            "description": "Southeast medical landing point.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 3,
             "current_load": 0,
             "available_slots": 3,
@@ -433,6 +670,7 @@
             "priority_level": 10,
             "zone_type": "medical",
             "demand_score": 60,
+<<<<<<< HEAD
             "weather_zone": "southeast"
         },
         {
@@ -443,12 +681,26 @@
             "lat": 48.1585,
             "lon": 11.5696,
             "description": "Specialist cardiac emergency hospital.",
+=======
+            "weather_zone": "southeast",
+            "charging_available": false,
+            "emergency_landing": true
+        },
+        {
+            "id": 16,
+            "name": "Harlaching Hospital",
+            "type": "hospital",
+            "lat": 48.1027,
+            "lon": 11.5798,
+            "description": "Southern medical landing point.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 3,
             "current_load": 1,
             "available_slots": 2,
             "availability_status": "busy",
             "priority_level": 10,
             "zone_type": "medical",
+<<<<<<< HEAD
             "demand_score": 70,
             "weather_zone": "central"
         },
@@ -460,6 +712,20 @@
             "lat": 48.36,
             "lon": 11.78,
             "description": "Airport charging hub.",
+=======
+            "demand_score": 60,
+            "weather_zone": "south",
+            "charging_available": false,
+            "emergency_landing": true
+        },
+        {
+            "id": 17,
+            "name": "Charging Hub A - Airport",
+            "type": "charging_hub",
+            "lat": 48.36,
+            "lon": 11.78,
+            "description": "Airport charging hub for recharging between airport missions.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 8,
             "current_load": 4,
             "available_slots": 4,
@@ -467,6 +733,7 @@
             "priority_level": 6,
             "zone_type": "airport",
             "demand_score": 85,
+<<<<<<< HEAD
             "weather_zone": "north"
         },
         {
@@ -528,6 +795,55 @@
             "lat": 48.109,
             "lon": 11.475,
             "description": "Southwest medical charging hub.",
+=======
+            "weather_zone": "north",
+            "charging_available": true,
+            "emergency_landing": false
+        },
+        {
+            "id": 18,
+            "name": "Charging Hub B - TUM Tech Area",
+            "type": "charging_hub",
+            "lat": 48.1525,
+            "lon": 11.574,
+            "description": "Technology-district charging hub near TUM and LMU.",
+            "capacity": 5,
+            "current_load": 2,
+            "available_slots": 3,
+            "availability_status": "available",
+            "priority_level": 6,
+            "zone_type": "educational",
+            "demand_score": 80,
+            "weather_zone": "central",
+            "charging_available": true,
+            "emergency_landing": false
+        },
+        {
+            "id": 19,
+            "name": "Charging Hub C - City Center",
+            "type": "charging_hub",
+            "lat": 48.139,
+            "lon": 11.581,
+            "description": "City-center charging hub near Marienplatz for high passenger turnover.",
+            "capacity": 5,
+            "current_load": 4,
+            "available_slots": 1,
+            "availability_status": "busy",
+            "priority_level": 6,
+            "zone_type": "commercial",
+            "demand_score": 85,
+            "weather_zone": "central",
+            "charging_available": true,
+            "emergency_landing": false
+        },
+        {
+            "id": 20,
+            "name": "Charging Hub D - Großhadern Zone",
+            "type": "charging_hub",
+            "lat": 48.109,
+            "lon": 11.475,
+            "description": "Southwest charging hub supporting Großhadern emergency logistics.",
+>>>>>>> 4f6292b (Modified UI)
             "capacity": 5,
             "current_load": 1,
             "available_slots": 4,
@@ -535,12 +851,37 @@
             "priority_level": 6,
             "zone_type": "medical",
             "demand_score": 70,
+<<<<<<< HEAD
             "weather_zone": "west"
+=======
+            "weather_zone": "west",
+            "charging_available": true,
+            "emergency_landing": false
+        },
+        {
+            "id": 21,
+            "name": "Charging Hub E - East Munich",
+            "type": "charging_hub",
+            "lat": 48.135,
+            "lon": 11.67,
+            "description": "Eastern charging hub supporting Messe München and Bogenhausen corridors.",
+            "capacity": 5,
+            "current_load": 3,
+            "available_slots": 2,
+            "availability_status": "busy",
+            "priority_level": 6,
+            "zone_type": "commercial",
+            "demand_score": 75,
+            "weather_zone": "east",
+            "charging_available": true,
+            "emergency_landing": false
+>>>>>>> 4f6292b (Modified UI)
         }
     ],
     "edges": [
         {
             "start": "Munich Airport",
+<<<<<<< HEAD
             "end": "Airport Charging Hub",
             "route_type": "charging_corridor",
             "altitude_layer": "transit",
@@ -698,11 +1039,66 @@
                 "emergency": 14.03,
                 "passenger": 25.43
             }
+=======
+            "end": "Charging Hub A - Airport",
+            "route_type": "charging_corridor",
+            "distance_km": 0.82,
+            "battery_cost": 0.82,
+            "noise_penalty": 0,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 1.64
+        },
+        {
+            "start": "Munich Airport",
+            "end": "Allianz Arena",
+            "route_type": "airport_corridor",
+            "distance_km": 19.18,
+            "battery_cost": 19.18,
+            "noise_penalty": 1,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 39.36
+        },
+        {
+            "start": "Munich Airport",
+            "end": "Munich Central Station (Hauptbahnhof)",
+            "route_type": "airport_corridor",
+            "distance_km": 29.13,
+            "battery_cost": 29.13,
+            "noise_penalty": 4,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 62.26
+        },
+        {
+            "start": "Munich Airport",
+            "end": "Messe München",
+            "route_type": "airport_corridor",
+            "distance_km": 25.28,
+            "battery_cost": 25.28,
+            "noise_penalty": 2,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 52.56
+        },
+        {
+            "start": "Allianz Arena",
+            "end": "Schwabing",
+            "route_type": "city_corridor",
+            "distance_km": 6.48,
+            "battery_cost": 6.48,
+            "noise_penalty": 7,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 19.96
+>>>>>>> 4f6292b (Modified UI)
         },
         {
             "start": "Allianz Arena",
             "end": "Olympiapark",
             "route_type": "city_corridor",
+<<<<<<< HEAD
             "altitude_layer": "standard",
             "safety_status": "open",
             "distance_km": 7.67,
@@ -758,11 +1154,42 @@
                 "emergency": 3.66,
                 "passenger": 11.9
             }
+=======
+            "distance_km": 7.67,
+            "battery_cost": 7.67,
+            "noise_penalty": 4,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 19.34
+        },
+        {
+            "start": "Olympiapark",
+            "end": "Munich Central Station (Hauptbahnhof)",
+            "route_type": "city_corridor",
+            "distance_km": 3.86,
+            "battery_cost": 3.86,
+            "noise_penalty": 6,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 13.72
+        },
+        {
+            "start": "Olympiapark",
+            "end": "LMU Munich",
+            "route_type": "city_corridor",
+            "distance_km": 3.63,
+            "battery_cost": 3.63,
+            "noise_penalty": 7,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 14.26
+>>>>>>> 4f6292b (Modified UI)
         },
         {
             "start": "Schwabing",
             "end": "LMU Munich",
             "route_type": "city_corridor",
+<<<<<<< HEAD
             "altitude_layer": "standard",
             "safety_status": "open",
             "distance_km": 1.79,
@@ -1258,11 +1685,20 @@
                 "emergency": 1.04,
                 "passenger": Infinity
             }
+=======
+            "distance_km": 1.79,
+            "battery_cost": 1.79,
+            "noise_penalty": 8,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 11.58
+>>>>>>> 4f6292b (Modified UI)
         },
         {
             "start": "Schwabing",
             "end": "München Klinik Schwabing",
             "route_type": "medical_corridor",
+<<<<<<< HEAD
             "altitude_layer": "emergency",
             "safety_status": "open",
             "distance_km": 0.29,
@@ -1338,11 +1774,119 @@
                 "emergency": 5.49,
                 "passenger": Infinity
             }
+=======
+            "distance_km": 0.29,
+            "battery_cost": 0.29,
+            "noise_penalty": 8,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 8.58
+        },
+        {
+            "start": "Schwabing",
+            "end": "Munich Clinic Bogenhausen",
+            "route_type": "medical_corridor",
+            "distance_km": 3.06,
+            "battery_cost": 3.06,
+            "noise_penalty": 6,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 12.12
+        },
+        {
+            "start": "LMU Munich",
+            "end": "TUM Main Campus",
+            "route_type": "city_corridor",
+            "distance_km": 0.95,
+            "battery_cost": 0.95,
+            "noise_penalty": 7,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 8.9
+        },
+        {
+            "start": "LMU Munich",
+            "end": "Marienplatz",
+            "route_type": "city_corridor",
+            "distance_km": 1.54,
+            "battery_cost": 1.54,
+            "noise_penalty": 6,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 9.08
+        },
+        {
+            "start": "TUM Main Campus",
+            "end": "Marienplatz",
+            "route_type": "city_corridor",
+            "distance_km": 1.36,
+            "battery_cost": 1.36,
+            "noise_penalty": 5,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 7.72
+        },
+        {
+            "start": "TUM Main Campus",
+            "end": "TUM Klinikum Rechts der Isar",
+            "route_type": "medical_corridor",
+            "distance_km": 2.72,
+            "battery_cost": 2.72,
+            "noise_penalty": 4,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 9.44
+        },
+        {
+            "start": "TUM Main Campus",
+            "end": "Charging Hub B - TUM Tech Area",
+            "route_type": "charging_corridor",
+            "distance_km": 0.61,
+            "battery_cost": 0.61,
+            "noise_penalty": 3,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 4.22
+        },
+        {
+            "start": "Marienplatz",
+            "end": "Munich Central Station (Hauptbahnhof)",
+            "route_type": "city_corridor",
+            "distance_km": 1.31,
+            "battery_cost": 1.31,
+            "noise_penalty": 7,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 9.62
+        },
+        {
+            "start": "Marienplatz",
+            "end": "Sendlinger Tor",
+            "route_type": "city_corridor",
+            "distance_km": 0.81,
+            "battery_cost": 0.81,
+            "noise_penalty": 7,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 8.62
+        },
+        {
+            "start": "Marienplatz",
+            "end": "Charging Hub C - City Center",
+            "route_type": "charging_corridor",
+            "distance_km": 0.45,
+            "battery_cost": 0.45,
+            "noise_penalty": 6,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 6.9
+>>>>>>> 4f6292b (Modified UI)
         },
         {
             "start": "Marienplatz",
             "end": "TUM Klinikum Rechts der Isar",
             "route_type": "medical_corridor",
+<<<<<<< HEAD
             "altitude_layer": "emergency",
             "safety_status": "closed",
             "distance_km": 1.76,
@@ -1555,6 +2099,157 @@
             "time": "17:01:52",
             "event_type": "LANDING_SLOT_RELEASED",
             "message": "TUM Main Campus: 1/5 slots occupied."
+=======
+            "distance_km": 1.76,
+            "battery_cost": 1.76,
+            "noise_penalty": 5,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 8.52
+        },
+        {
+            "start": "Marienplatz",
+            "end": "Messe München",
+            "route_type": "city_corridor",
+            "distance_km": 8.52,
+            "battery_cost": 8.52,
+            "noise_penalty": 3,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 20.04
+        },
+        {
+            "start": "Messe München",
+            "end": "Munich Clinic Bogenhausen",
+            "route_type": "medical_corridor",
+            "distance_km": 5.44,
+            "battery_cost": 5.44,
+            "noise_penalty": 3,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 13.88
+        },
+        {
+            "start": "Messe München",
+            "end": "München Klinik Neuperlach",
+            "route_type": "medical_corridor",
+            "distance_km": 4.82,
+            "battery_cost": 4.82,
+            "noise_penalty": 4,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 13.64
+        },
+        {
+            "start": "Munich Clinic Bogenhausen",
+            "end": "TUM Klinikum Rechts der Isar",
+            "route_type": "medical_corridor",
+            "distance_km": 2.52,
+            "battery_cost": 2.52,
+            "noise_penalty": 5,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 10.04
+        },
+        {
+            "start": "Charging Hub E - East Munich",
+            "end": "Messe München",
+            "route_type": "charging_corridor",
+            "distance_km": 1.51,
+            "battery_cost": 1.51,
+            "noise_penalty": 2,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 5.02
+        },
+        {
+            "start": "Charging Hub E - East Munich",
+            "end": "Munich Clinic Bogenhausen",
+            "route_type": "charging_corridor",
+            "distance_km": 4.09,
+            "battery_cost": 4.09,
+            "noise_penalty": 3,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 11.18
+        },
+        {
+            "start": "Charging Hub E - East Munich",
+            "end": "München Klinik Neuperlach",
+            "route_type": "charging_corridor",
+            "distance_km": 3.89,
+            "battery_cost": 3.89,
+            "noise_penalty": 3,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 10.78
+        },
+        {
+            "start": "Sendlinger Tor",
+            "end": "Harlaching Hospital",
+            "route_type": "medical_corridor",
+            "distance_km": 3.5,
+            "battery_cost": 3.5,
+            "noise_penalty": 5,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 12.0
+        },
+        {
+            "start": "Sendlinger Tor",
+            "end": "Großhadern Clinic",
+            "route_type": "medical_corridor",
+            "distance_km": 7.6,
+            "battery_cost": 7.6,
+            "noise_penalty": 5,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 20.2
+        },
+        {
+            "start": "Sendlinger Tor",
+            "end": "Munich Central Station (Hauptbahnhof)",
+            "route_type": "city_corridor",
+            "distance_km": 1.01,
+            "battery_cost": 1.01,
+            "noise_penalty": 7,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 9.02
+        },
+        {
+            "start": "Großhadern Clinic",
+            "end": "Charging Hub D - Großhadern Zone",
+            "route_type": "charging_corridor",
+            "distance_km": 0.47,
+            "battery_cost": 0.47,
+            "noise_penalty": 2,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 2.94
+        },
+        {
+            "start": "Großhadern Clinic",
+            "end": "Harlaching Hospital",
+            "route_type": "medical_corridor",
+            "distance_km": 8.23,
+            "battery_cost": 8.23,
+            "noise_penalty": 4,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 20.46
+        },
+        {
+            "start": "Harlaching Hospital",
+            "end": "München Klinik Neuperlach",
+            "route_type": "medical_corridor",
+            "distance_km": 4.92,
+            "battery_cost": 4.92,
+            "noise_penalty": 4,
+            "weather_penalty": 0,
+            "traffic_penalty": 0,
+            "total_cost": 13.84
+>>>>>>> 4f6292b (Modified UI)
         }
     ]
 }
