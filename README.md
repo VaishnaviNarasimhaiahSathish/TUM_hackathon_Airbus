@@ -54,6 +54,23 @@ the outbound profile (600 m, 140 km/h). The replay panel shows each aircraft's
 speed, altitude, status, neighbor count, current corridor traffic/noise, active
 message count, and reservation count.
 
+## Run the 30-eVTOL operational scenario
+
+```powershell
+python -m backend.operational_scenario
+```
+
+This is the scaled deterministic scenario used by the React dashboard. All 30
+eVTOLs have a defined origin and destination: 26 autonomous pad-to-pad
+transits and four hospital-to-hospital medical transfers carrying either an
+organ-preservation container or an emergency medical kit. It includes
+corridor-slot congestion and a weather closure with rerouting. A critical
+battery fault diverts one autonomous transit to a charger, then resumes its
+original pad-to-pad mission. Medical transfers remain independent hospital
+deliveries. A controllable technical failure affects a different non-medical
+aircraft and diverts it to the nearest charging/maintenance station, where it
+is grounded and its original mission is aborted.
+
 ## Run the C4/C5 safety-decision demo
 
 ```powershell
@@ -79,7 +96,7 @@ emergency events into its map replay is a later dashboard step.
 
 ## React control-center dashboard
 
-The React dashboard now consumes the same three-agent fleet replay used by the
+The React dashboard now consumes the same 30-aircraft operational replay used by the
 Python simulation. The backend is the only live data source; the old
 `frontend/src/data/worldData.ts` values are retained solely as an offline UI
 fallback when the API is unavailable.
@@ -97,13 +114,14 @@ npm run dev
 
 Open the Vite URL shown in the second terminal. Vite proxies `/api` to the
 Python service at `http://127.0.0.1:8000`. The dashboard polls once per second
-and loops through a deterministic three-agent replay. For a fixed tick during
+and loops through the deterministic 30-eVTOL replay. For a fixed tick during
 debugging, open `http://127.0.0.1:8000/api/simulation?tick=0`.
 
 Each API snapshot includes the 21 digital-twin nodes, 33 dynamic corridor
-records, node occupancy, three agent positions/statuses/battery/altitude/speed,
-route intent, local communication and constraint views, decision reasons,
-alerts, weather-zone state, and protocol/reservation metrics.
+records, node occupancy, 30 agent positions/statuses/battery/altitude/speed,
+medical cargo and incident state, route intent, local communication and
+constraint views, decision reasons, alerts, weather-zone state, and
+protocol/reservation metrics.
 
 ## Project layout
 

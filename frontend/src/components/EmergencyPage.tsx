@@ -164,6 +164,11 @@ export default function EmergencyPage({
                   {' · '}Mission: {ac.mission}
                   {' · '}Location: {ac.from}
                 </div>
+                {ac.emergency_reason && (
+                  <div style={{ fontSize: 11, color: 'var(--text-secondary)', marginTop: 4 }}>
+                    Incident: <span style={{ color: 'var(--red)' }}>{ac.emergency_reason.replace('_', ' ')}</span>
+                  </div>
+                )}
               </div>
             ))
           )}

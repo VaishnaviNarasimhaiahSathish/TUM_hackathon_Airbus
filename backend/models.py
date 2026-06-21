@@ -31,6 +31,13 @@ class HealthStatus(str, Enum):
     FAILURE = "failure"
 
 
+class MissionType(str, Enum):
+    """Operational mission category without passenger-demand modelling."""
+
+    AUTONOMOUS_TRANSIT = "autonomous_transit"
+    MEDICAL_TRANSFER = "medical_transfer"
+
+
 class AltitudeLevel(str, Enum):
     """Simulation flight levels with their nominal altitude and cruise speed."""
 
@@ -69,6 +76,10 @@ class EVTOLAgent:
     evtol_id: str
     current_node: str
     target_node: str | None = None
+    assigned_origin: str | None = None
+    assigned_destination: str | None = None
+    mission_type: MissionType = MissionType.AUTONOMOUS_TRANSIT
+    cargo_description: str | None = None
     mission_target: str | None = None
     current_route: list[str] = field(default_factory=list)
     current_edge: Edge | None = None
@@ -86,6 +97,7 @@ class EVTOLAgent:
     route_cost_breakdown: dict[str, float] = field(default_factory=dict)
     last_reroute_tick: int | None = None
     reroute_count: int = 0
+    emergency_reason: str | None = None
     last_decision_reason: str = "Initialized and awaiting assignment."
 
     def __post_init__(self) -> None:
@@ -128,6 +140,10 @@ class EVTOLAgent:
             "evtol_id": self.evtol_id,
             "current_node": self.current_node,
             "target_node": self.target_node,
+            "assigned_origin": self.assigned_origin,
+            "assigned_destination": self.assigned_destination,
+            "mission_type": self.mission_type.value,
+            "cargo_description": self.cargo_description,
             "mission_target": self.mission_target,
             "current_route": list(self.current_route),
             "current_edge": list(self.current_edge) if self.current_edge else None,
@@ -146,5 +162,6 @@ class EVTOLAgent:
             "route_cost_breakdown": dict(self.route_cost_breakdown),
             "last_reroute_tick": self.last_reroute_tick,
             "reroute_count": self.reroute_count,
+            "emergency_reason": self.emergency_reason,
             "last_decision_reason": self.last_decision_reason,
         }

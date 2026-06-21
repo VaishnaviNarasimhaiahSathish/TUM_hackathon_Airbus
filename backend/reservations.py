@@ -48,8 +48,17 @@ class ReservationDecision:
 class ReservationTable:
     """Stores non-overlapping edge/landing windows for the current simulation."""
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        *,
+        edge_capacity: int = 1,
+        landing_capacity: int = 1,
+    ) -> None:
+        if edge_capacity < 1 or landing_capacity < 1:
+            raise ValueError("Reservation capacities must be at least one")
         self._reservations: list[ReservationRequest] = []
+        self.edge_capacity = edge_capacity
+        self.landing_capacity = landing_capacity
 
     @property
     def reservations(self) -> list[ReservationRequest]:
@@ -92,7 +101,12 @@ class ReservationTable:
             and request.start_tick <= reservation.end_tick
             and reservation.start_tick <= request.end_tick
         ]
-        if conflicts:
+        capacity = (
+            self.edge_capacity
+            if request.resource == ReservationResource.EDGE
+            else self.landing_capacity
+        )
+        if len(conflicts) >= capacity:
             conflict = min(conflicts, key=lambda reservation: reservation.priority)
             return ReservationDecision(
                 request_id=request.request_id,

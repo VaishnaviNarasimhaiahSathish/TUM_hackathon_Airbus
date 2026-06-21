@@ -277,6 +277,8 @@ export default function VisualizationPage({
                 <div style={{ fontWeight: 700, color: '#00b4ff', marginBottom: 4 }}>✈ {ac.id}</div>
                 <div>Status: <b style={{ color: ac.status === 'emergency' ? '#ff3355' : undefined }}>{ac.status}</b></div>
                 <div>Mission: {ac.mission}</div>
+                {ac.cargo_description && <div>Cargo: {ac.cargo_description}</div>}
+                {ac.emergency_reason && <div>Incident: {ac.emergency_reason.replace('_', ' ')}</div>}
                 <div>Battery: <b style={{ color: ac.battery < 30 ? '#ff3355' : ac.battery < 60 ? '#fb8c00' : '#00e887' }}>{ac.battery}%</b></div>
                 <div>{ac.from} → {ac.to}</div>
                 {ac.altitude_m > 0 && <div>Alt: {ac.altitude_m} m · {ac.speed_kmh} km/h</div>}

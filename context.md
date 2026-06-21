@@ -44,6 +44,7 @@ backend/
   planner.py         Dynamic weighted route planning and cost breakdowns
   emergency.py       Battery, charging, hospital-dispatch, and reroute decisions
   emergency_scenario.py Deterministic C4/C5 console demonstration
+  operational_scenario.py Scaled 30-eVTOL operational simulation and events
   dashboard_feed.py  UI-ready snapshots from the global digital twin replay
   api_server.py      Standard-library JSON API for the React dashboard
   fleet_scenario.py  Three-agent tick simulation with live traffic/noise
@@ -138,9 +139,9 @@ The payload contains:
   emergency-landing capability.
 - `edges`: all 33 corridors with active agents, traffic density, noise,
   weather/closure fields, and transparent cost fields.
-- `agents`: E1, E2, and E3 positions, operational status, battery, speed,
+- `agents`: all eVTOL positions, operational status, battery, speed,
   altitude, route, ETA, local communication/constraint views, and their latest
-  decision reason.
+  decision reason. The default dashboard scenario supplies 30 eVTOL reports.
 - `alerts`, `weather_zones`, and aggregate message/reservation metrics.
 
 The React app polls this endpoint once per second. Its former `worldData.ts`
@@ -246,6 +247,10 @@ dependency. Each agent must include at least:
 | `evtol_id` | Stable deterministic identifier, for example `E1` |
 | `current_node` | Current graph node when not travelling |
 | `target_node` | Immediate operational destination |
+| `assigned_origin` | Immutable origin displayed for the current assigned mission |
+| `assigned_destination` | Immutable planned destination displayed for the current assigned mission |
+| `mission_type` | `autonomous_transit` or `medical_transfer` |
+| `cargo_description` | Visible medical payload description for hospital transfers |
 | `current_route` | Remaining ordered node sequence |
 | `current_edge` | Corridor currently being flown, if any |
 | `battery_level` | Percentage from 0 to 100 |
@@ -264,6 +269,8 @@ dependency. Each agent must include at least:
 
 Useful supporting fields are `mission_target`, `edge_progress`,
 `route_cost_breakdown`, `last_reroute_tick`, and `reroute_count`.
+`emergency_reason` identifies the active or last safety incident, for example
+`battery_failure` or `technical_failure`.
 
 ## Fleet simulation status
 
@@ -302,6 +309,50 @@ battery, and does not inject emergency events into its normal map replay.
 Those decisions are implemented and demonstrated separately in the C4/C5
 safety-decision module so they can be integrated into the dashboard in a later
 focused phase.
+
+## 30-eVTOL operational scenario
+
+`backend/operational_scenario.py` is the dashboard's default simulation. It
+creates 30 named agents (`E01` through `E30`) with capacity-safe, defined
+missions: 26 autonomous pad-to-pad transits and four hospital-to-hospital
+medical transfers. Medical transfers carry a visible `cargo_description`,
+alternating between an organ-preservation container and an emergency medical
+kit. The shared digital twin starts with matching origin occupancy, releases
+departures, and tracks final arrivals.
+
+The deterministic run includes three visible operational situations:
+
+- Traffic congestion: each corridor has three scalable airspace slots per
+  time-window; excess requests queue under the existing safety/battery/ETA/ID
+  priority rule.
+- Weather: a frequently used non-leaf corridor receives a high-risk closure at
+  tick 18. Waiting agents use dynamic route costs and reroute around it; the
+  closure clears at tick 75.
+- Emergencies: a critical battery fault at tick 10 is deliberately assigned to
+  one autonomous pad-to-pad transit. It diverts to a reachable charging hub,
+  recharges, and resumes its original transit mission. Medical transfers remain
+  independent hospital-to-hospital cargo missions. A controllable technical
+  failure at tick 45 affects a different non-medical eVTOL and diverts it to
+  the nearest reachable charging/maintenance station. It remains grounded
+  there for maintenance and its original mission is aborted.
+
+`emergency_reason` represents an active safety condition, not historical
+telemetry. The battery scenario sets it to `critical_battery` only at or below
+15% battery and clears it once charging restores the eVTOL to at least 30%.
+Technical failure remains distinct at every battery level: it is displayed as
+`technical_failure` / `Technical Failure`, uses emergency routing to the
+maintenance station, and is never labelled as a battery event.
+
+Battery reduces by 1% per flown kilometre. The simulation completes with all
+30 aircraft parked (including the technically failed aircraft at a maintenance
+charger), while the event and reservation logs remain available to the
+dashboard as alerts and metrics.
+
+Run it with:
+
+```powershell
+python -m backend.operational_scenario
+```
 
 ## C4/C5 safety-decision status
 

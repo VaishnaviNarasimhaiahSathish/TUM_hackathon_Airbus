@@ -50,7 +50,9 @@ export type MissionType =
   | 'Emergency'
   | 'Autonomous Transit'
   | 'Charging Diversion'
-  | 'Emergency Response';
+  | 'Emergency Response'
+  | 'Technical Failure'
+  | 'Battery Recovery';
 
 export interface Aircraft {
   id: string;
@@ -68,11 +70,16 @@ export interface Aircraft {
   operational_status?: string;
   current_node?: string;
   target_node?: string | null;
+  assigned_origin?: string | null;
+  assigned_destination?: string | null;
   mission_target?: string | null;
+  mission_type?: string;
+  cargo_description?: string | null;
   current_edge?: [string, string] | null;
   current_route?: string[];
   estimated_arrival_tick?: number | null;
   health_status?: string;
+  emergency_reason?: string | null;
   neighbor_count?: number;
   communication_neighbors?: Array<Record<string, unknown>>;
   local_traffic_view?: Record<string, number>;
