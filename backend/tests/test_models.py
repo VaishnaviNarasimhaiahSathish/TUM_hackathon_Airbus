@@ -2,7 +2,7 @@
 
 import unittest
 
-from backend.models import AltitudeLevel, EVTOLAgent, EVTOLStatus, HealthStatus
+from backend.models import AltitudeLevel, EVTOLAgent, EVTOLStatus, HealthStatus, MissionType
 
 
 class EVTOLAgentTests(unittest.TestCase):
@@ -10,6 +10,8 @@ class EVTOLAgentTests(unittest.TestCase):
         agent = EVTOLAgent(evtol_id="E1", current_node="Munich Airport")
 
         self.assertIsNone(agent.target_node)
+        self.assertIsNone(agent.assigned_origin)
+        self.assertIsNone(agent.assigned_destination)
         self.assertEqual(agent.current_route, [])
         self.assertIsNone(agent.current_edge)
         self.assertEqual(agent.battery_level, 100.0)
@@ -29,6 +31,10 @@ class EVTOLAgentTests(unittest.TestCase):
             evtol_id="E2",
             current_node="Marienplatz",
             target_node="TUM Main Campus",
+            assigned_origin="Marienplatz",
+            assigned_destination="TUM Main Campus",
+            mission_type=MissionType.MEDICAL_TRANSFER,
+            cargo_description="Organ preservation kit",
             mission_target="TUM Main Campus",
             current_route=["Marienplatz", "TUM Main Campus"],
             current_edge=("Marienplatz", "TUM Main Campus"),
@@ -53,6 +59,7 @@ class EVTOLAgentTests(unittest.TestCase):
             route_cost_breakdown={"distance": 4.2, "weather": 0.0},
             last_reroute_tick=8,
             reroute_count=1,
+            emergency_reason="battery_failure",
             last_decision_reason="Continuing along the assigned corridor.",
         )
 
@@ -62,6 +69,10 @@ class EVTOLAgentTests(unittest.TestCase):
                 "evtol_id": "E2",
                 "current_node": "Marienplatz",
                 "target_node": "TUM Main Campus",
+                "assigned_origin": "Marienplatz",
+                "assigned_destination": "TUM Main Campus",
+                "mission_type": "medical_transfer",
+                "cargo_description": "Organ preservation kit",
                 "mission_target": "TUM Main Campus",
                 "current_route": ["Marienplatz", "TUM Main Campus"],
                 "current_edge": ["Marienplatz", "TUM Main Campus"],
@@ -87,6 +98,7 @@ class EVTOLAgentTests(unittest.TestCase):
                 "route_cost_breakdown": {"distance": 4.2, "weather": 0.0},
                 "last_reroute_tick": 8,
                 "reroute_count": 1,
+                "emergency_reason": "battery_failure",
                 "last_decision_reason": "Continuing along the assigned corridor.",
             },
         )

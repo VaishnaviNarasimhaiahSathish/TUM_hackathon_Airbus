@@ -300,6 +300,7 @@ def resume_mission_after_charging(
     agent.battery_level = charged_battery_percent
     restored_target = agent.mission_target
     agent.mission_target = None
+    agent.emergency_reason = None
     _apply_plan(
         agent,
         plan,

@@ -6,7 +6,7 @@ integration: every tick updates canonical edge traffic/noise and then copies
 only local corridor data into each eVTOL's local views.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from math import ceil
 from random import Random
 
@@ -90,13 +90,18 @@ class AgentFrame:
     lon: float
     current_node: str
     target_node: str | None
+    assigned_origin: str | None
+    assigned_destination: str | None
     mission_target: str | None
+    mission_type: str
+    cargo_description: str | None
     status: str
     speed_kmh: float
     altitude_level: str
     altitude_m: int
     battery_level: float
     health_status: str
+    emergency_reason: str | None
     current_edge: tuple[str, str] | None
     current_route: list[str]
     estimated_arrival_time: int | None
@@ -116,13 +121,18 @@ class AgentFrame:
             "lon": self.lon,
             "current_node": self.current_node,
             "target_node": self.target_node,
+            "assigned_origin": self.assigned_origin,
+            "assigned_destination": self.assigned_destination,
             "mission_target": self.mission_target,
+            "mission_type": self.mission_type,
+            "cargo_description": self.cargo_description,
             "status": self.status,
             "speed_kmh": self.speed_kmh,
             "altitude_level": self.altitude_level,
             "altitude_m": self.altitude_m,
             "battery_level": self.battery_level,
             "health_status": self.health_status,
+            "emergency_reason": self.emergency_reason,
             "current_edge": list(self.current_edge) if self.current_edge else None,
             "current_route": list(self.current_route),
             "estimated_arrival_time": self.estimated_arrival_time,
@@ -180,6 +190,7 @@ class FleetScenarioResult:
     tick_seconds: int
     message_log: list[dict[str, object]]
     reservation_log: list[dict[str, object]]
+    event_log: list[dict[str, object]] = field(default_factory=list)
 
 
 def _select_altitude_level(
@@ -391,12 +402,19 @@ def _refresh_local_views(
             / TICK_SECONDS
         )
         agent.estimated_arrival_time = current_tick + remaining_ticks
-        agent.last_decision_reason = (
-            f"Flying at {agent.altitude_level.value} level "
-            f"({agent.altitude_m} m, {agent.speed_kmh:.0f} km/h); "
-            f"local traffic {current_state.traffic_density:.2f}, "
-            f"noise {current_state.noise_level:.2f}."
-        )
+        if agent.emergency_reason == "technical_failure":
+            agent.last_decision_reason = (
+                f"Technical failure: controlled flight toward {agent.target_node}; "
+                f"maintenance diversion follows at the next safe node. Local traffic "
+                f"{current_state.traffic_density:.2f}, noise {current_state.noise_level:.2f}."
+            )
+        else:
+            agent.last_decision_reason = (
+                f"Flying at {agent.altitude_level.value} level "
+                f"({agent.altitude_m} m, {agent.speed_kmh:.0f} km/h); "
+                f"local traffic {current_state.traffic_density:.2f}, "
+                f"noise {current_state.noise_level:.2f}."
+            )
 
 
 def _advance_agent(
@@ -463,13 +481,22 @@ def _snapshot_fleet(
                 lon=lon,
                 current_node=agent.current_node,
                 target_node=agent.target_node,
+                assigned_origin=agent.assigned_origin or state.path[0],
+                assigned_destination=(
+                    agent.assigned_destination
+                    or agent.mission_target
+                    or agent.target_node
+                ),
                 mission_target=agent.mission_target,
+                mission_type=agent.mission_type.value,
+                cargo_description=agent.cargo_description,
                 status=agent.status.value,
                 speed_kmh=agent.speed_kmh,
                 altitude_level=agent.altitude_level.value,
                 altitude_m=agent.altitude_m,
                 battery_level=agent.battery_level,
                 health_status=agent.health_status.value,
+                emergency_reason=agent.emergency_reason,
                 current_edge=agent.current_edge,
                 current_route=list(agent.current_route),
                 estimated_arrival_time=agent.estimated_arrival_time,

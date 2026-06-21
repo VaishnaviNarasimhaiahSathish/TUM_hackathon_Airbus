@@ -3,8 +3,9 @@
 from dataclasses import dataclass, field
 from time import monotonic
 
-from backend.fleet_scenario import FleetScenarioResult, run_three_agent_fleet_scenario
+from backend.fleet_scenario import FleetScenarioResult
 from backend.graph import calculate_air_distance_km
+from backend.operational_scenario import run_operational_fleet_scenario
 
 
 UI_STATUS_BY_OPERATIONAL_STATUS = {
@@ -54,12 +55,27 @@ def _flight_progress(
 
 def _mission_label(result: FleetScenarioResult, frame: object) -> str:
     """Expose operational intent without inventing passenger-demand data."""
-    if frame.status == "emergency":
-        return "Emergency Response"
+    if frame.emergency_reason == "technical_failure":
+        return "Technical Failure"
+    if frame.emergency_reason == "critical_battery":
+        return "Battery Recovery"
+    if frame.mission_type == "medical_transfer":
+        return "Medical"
     target = result.airspace.nodes.get(frame.target_node) if frame.target_node else None
     if target is not None and target.charging_available:
         return "Charging Diversion"
+    if frame.status == "emergency":
+        return "Emergency Response"
     return "Autonomous Transit"
+
+
+def _ui_status(frame: object) -> str:
+    """Show a technical-failure aircraft as grounded after it reaches maintenance."""
+    if frame.status == "emergency":
+        return "emergency"
+    if frame.health_status == "failure":
+        return "grounded"
+    return UI_STATUS_BY_OPERATIONAL_STATUS[frame.status]
 
 
 def _agent_payload(result: FleetScenarioResult, frame: object) -> dict[str, object]:
@@ -67,12 +83,12 @@ def _agent_payload(result: FleetScenarioResult, frame: object) -> dict[str, obje
     return {
         "id": frame.evtol_id,
         "evtol_id": frame.evtol_id,
-        "status": UI_STATUS_BY_OPERATIONAL_STATUS[frame.status],
+        "status": _ui_status(frame),
         "operational_status": frame.status,
         "battery": round(frame.battery_level, 1),
         "mission": _mission_label(result, frame),
-        "from": frame.current_edge[0] if frame.current_edge else frame.current_node,
-        "to": frame.target_node or frame.current_node,
+        "from": frame.assigned_origin or frame.current_node,
+        "to": frame.assigned_destination or frame.target_node or frame.current_node,
         "progress": _flight_progress(result, frame),
         "lat": round(frame.lat, 6),
         "lon": round(frame.lon, 6),
@@ -80,11 +96,16 @@ def _agent_payload(result: FleetScenarioResult, frame: object) -> dict[str, obje
         "speed_kmh": round(frame.speed_kmh, 1),
         "current_node": frame.current_node,
         "target_node": frame.target_node,
+        "assigned_origin": frame.assigned_origin,
+        "assigned_destination": frame.assigned_destination,
         "mission_target": frame.mission_target,
+        "mission_type": frame.mission_type,
+        "cargo_description": frame.cargo_description,
         "current_edge": current_edge,
         "current_route": list(frame.current_route),
         "estimated_arrival_tick": frame.estimated_arrival_time,
         "health_status": frame.health_status,
+        "emergency_reason": frame.emergency_reason,
         "neighbor_count": frame.neighbor_count,
         "communication_neighbors": list(frame.communication_neighbors),
         "local_traffic_view": dict(frame.local_traffic_view),
@@ -182,11 +203,15 @@ def _alert_payloads(
     time_label = f"T+{tick.simulation_seconds:04d}s"
     for agent in agents:
         if agent["operational_status"] == "emergency":
+            incident = str(agent.get("emergency_reason") or "emergency").replace("_", " ")
             alerts.append(
                 {
                     "id": f"emergency-{agent['id']}-{tick.tick}",
                     "level": "critical",
-                    "message": f"{agent['id']} emergency route to {agent['to']}: {agent['decision_reason']}",
+                    "message": (
+                        f"{agent['id']} {incident} route to {agent['to']}: "
+                        f"{agent['decision_reason']}"
+                    ),
                     "time": time_label,
                 }
             )
@@ -217,11 +242,25 @@ def _alert_payloads(
         message_type = message["message_type"]
         if message_type not in {"emergency_declared", "battery_low_alert", "reroute_intent"}:
             continue
-        alerts.append(
+        alerts.insert(
+            0,
             {
                 "id": str(message["message_id"]),
                 "level": "critical" if message_type == "emergency_declared" else "warning",
                 "message": f"{message_type.replace('_', ' ').title()} from {message['sender_id']}.",
+                "time": time_label,
+            }
+        )
+
+    for event in result.event_log:
+        if event["tick"] != tick.tick:
+            continue
+        alerts.insert(
+            0,
+            {
+                "id": f"event-{event['type']}-{event['tick']}",
+                "level": event["level"],
+                "message": event["message"],
                 "time": time_label,
             }
         )
@@ -284,17 +323,17 @@ def build_dashboard_snapshot(
 
 @dataclass(slots=True)
 class FleetDashboardFeed:
-    """Owns one deterministic global replay and advances it by wall-clock time."""
+    """Owns one deterministic 30-aircraft replay and advances it by wall clock."""
 
-    random_seed: int = 11
-    replay_seconds_per_tick: float = 1.0
+    random_seed: int = 30
+    replay_seconds_per_tick: float = 0.25
     result: FleetScenarioResult = field(init=False)
     _started_at: float = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
         if self.replay_seconds_per_tick <= 0:
             raise ValueError("replay_seconds_per_tick must be greater than zero")
-        self.result = run_three_agent_fleet_scenario(random_seed=self.random_seed)
+        self.result = run_operational_fleet_scenario(random_seed=self.random_seed)
         self._started_at = monotonic()
 
     def snapshot(self, tick_index: int | None = None) -> dict[str, object]:
