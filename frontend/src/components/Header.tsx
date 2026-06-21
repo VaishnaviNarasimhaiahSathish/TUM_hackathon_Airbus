@@ -23,7 +23,9 @@ export default function Header({
   return (
     <header className="header">
       <div className="header-brand">
-        <div className="header-logo">A</div>
+        <div className="header-logo">
+          <img src="/airbuslogo.png" alt="Airbus" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        </div>
         <div>
           <div className="header-title">Airbus Control Center</div>
           <div className="header-subtitle">Urban Air Mobility · Munich</div>

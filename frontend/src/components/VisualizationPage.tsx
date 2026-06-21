@@ -87,7 +87,7 @@ function aircraftIcon(status: string) {
 // ── Corridor styles ──────────────────────────────────────────
 const CORRIDOR_STYLES: Record<string, { color: string; weight: number; dashArray?: string; opacity: number }> = {
   airport_corridor:  { color: '#5c6bc0', weight: 3, opacity: 0.85 },
-  city_corridor:     { color: '#78909c', weight: 2, opacity: 0.7 },
+  city_corridor:     { color: '#ff08ff', weight: 2, opacity: 0.7 },
   medical_corridor:  { color: '#ef5350', weight: 2, dashArray: '6 5', opacity: 0.8 },
   charging_corridor: { color: '#26a69a', weight: 2, dashArray: '6 5', opacity: 0.75 },
 };
@@ -97,7 +97,7 @@ const LOWEST_COST_STYLE = { color: '#ffd600', weight: 4, opacity: 0.95 };
 // ── Layer checkbox labels ──────────────────────────────────────────
 const LAYER_LABELS = [
   { key: 'airport',  label: 'Airport Corridors',        color: '#5c6bc0', dash: false },
-  { key: 'city',     label: 'City Corridors',            color: '#78909c', dash: false },
+  { key: 'city',     label: 'City Corridors',            color: '#ff08ff', dash: false },
   { key: 'medical',  label: 'Medical Corridors',         color: '#ef5350', dash: true },
   { key: 'charging', label: 'Charging Corridors',        color: '#26a69a', dash: true },
   { key: 'lowest',   label: 'Lowest-Cost Path',          color: '#ffd600', dash: false },
@@ -277,8 +277,6 @@ export default function VisualizationPage({
                 <div style={{ fontWeight: 700, color: '#00b4ff', marginBottom: 4 }}>✈ {ac.id}</div>
                 <div>Status: <b style={{ color: ac.status === 'emergency' ? '#ff3355' : undefined }}>{ac.status}</b></div>
                 <div>Mission: {ac.mission}</div>
-                {ac.cargo_description && <div>Cargo: {ac.cargo_description}</div>}
-                {ac.emergency_reason && <div>Incident: {ac.emergency_reason.replace('_', ' ')}</div>}
                 <div>Battery: <b style={{ color: ac.battery < 30 ? '#ff3355' : ac.battery < 60 ? '#fb8c00' : '#00e887' }}>{ac.battery}%</b></div>
                 <div>{ac.from} → {ac.to}</div>
                 {ac.altitude_m > 0 && <div>Alt: {ac.altitude_m} m · {ac.speed_kmh} km/h</div>}
@@ -361,10 +359,30 @@ export default function VisualizationPage({
 
       {/* ── RIGHT LAYER CONTROLS ── */}
       <div style={{ ...panelStyle, top: 12, right: 12, padding: '12px 14px', minWidth: 210 }}>
-        <div style={{ fontSize: 10, fontWeight: 700, color: '#6a9cc8', marginBottom: 10, textTransform: 'uppercase', letterSpacing: 1.5 }}>
-          Layers
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: '#6a9cc8', textTransform: 'uppercase', letterSpacing: 1.5 }}>
+            Layers
+          </div>
+          <div style={{ display: 'flex', gap: 4 }}>
+            <button
+              onClick={() => setLayers(Object.fromEntries(LAYER_LABELS.map(l => [l.key, true])))}
+              style={{
+                fontSize: 9, fontWeight: 700, padding: '2px 7px', borderRadius: 4, cursor: 'pointer',
+                background: 'rgba(0,180,255,0.1)', border: '1px solid #0077aa', color: '#00b4ff',
+                letterSpacing: 0.5, textTransform: 'uppercase',
+              }}
+            >All</button>
+            <button
+              onClick={() => setLayers(Object.fromEntries(LAYER_LABELS.map(l => [l.key, false])))}
+              style={{
+                fontSize: 9, fontWeight: 700, padding: '2px 7px', borderRadius: 4, cursor: 'pointer',
+                background: 'rgba(255,255,255,0.04)', border: '1px solid #1a3560', color: '#3a6080',
+                letterSpacing: 0.5, textTransform: 'uppercase',
+              }}
+            >None</button>
+          </div>
         </div>
-        <div style={{ fontSize: 10, color: '#3a6080', marginTop: -6, marginBottom: 10 }}>
+        <div style={{ fontSize: 10, color: '#3a6080', marginBottom: 10 }}>
           {replayLabel} · tick {simulation.tick}
         </div>
         {LAYER_LABELS.map(l => (

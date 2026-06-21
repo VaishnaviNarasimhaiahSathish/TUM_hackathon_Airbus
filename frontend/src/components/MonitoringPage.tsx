@@ -33,7 +33,7 @@ function StatusBadge({ status }: { status: Aircraft['status'] }) {
 }
 
 function MissionBadge({ mission }: { mission: Aircraft['mission'] }) {
-  const cls = mission === 'Medical' ? 'medical' : mission === 'Emergency' || mission === 'Technical Failure' || mission === 'Battery Recovery' ? 'emergency' : mission === 'Cargo' ? 'cargo' : 'passenger';
+  const cls = mission === 'Medical' ? 'medical' : mission === 'Emergency' ? 'emergency' : mission === 'Cargo' ? 'cargo' : 'passenger';
   return <span className={`badge ${cls}`}>{mission}</span>;
 }
 
